@@ -1,0 +1,27 @@
+base:
+  image: easypi/openwrt:base
+  command: sleep infinity
+  environment:
+    - TERM=xterm
+  restart: unless-stopped
+
+bcm2708:
+  extends:
+    service: base
+  image: easypi/openwrt:bcm2708
+  volumes:
+    - ./data/bcm2708:/data
+
+bcm2710:
+  extends:
+    service: base
+  image: easypi/openwrt:bcm2710
+  volumes:
+    - ./data/bcm2710:/data
+
+mt7628:
+  extends:
+    service: base
+  image: easypi/openwrt:mt7628
+  volumes:
+    - ./data/mt7628:/data
