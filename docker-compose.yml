@@ -25,3 +25,10 @@ mt7628:
   image: easypi/openwrt:mt7628
   volumes:
     - ./data/mt7628:/data
+
+x86-64:
+  extends:
+    service: base
+  image: easypi/openwrt:x86-64
+  volumes:
+    - ./data/x86-64:/data

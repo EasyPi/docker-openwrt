@@ -39,11 +39,11 @@ $ docker-compose exec bcm2708 bash
 >>> make defconfig
 >>> IGNORE_ERRORS=1 make V=s
 
->>> sudo apt install -y asciidoc xmlto
 >>> git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
+>>> ./scripts/feeds install libopenssl zlib
 >>> vi package/shadowsocks-libev/Makefile
-- Package/shadowsocks-libev-spec = $(call Package/shadowsocks-libev/Default,openssl,(OpenSSL),+libopenssl +libpthread +ipset +ip)
-+ Package/shadowsocks-libev-spec = $(call Package/shadowsocks-libev/Default,openssl,(OpenSSL),+libopenssl +libpthread +ipset +ip +iptables-mod-tproxy +zlib)
+- DEPENDS:=$(3) +libpthread
++ DEPENDS:=$(3) +libpthread +zlib
 >>> make menuconfig # Network ▷ shadowsocks-libev-spec ▷ Save ▷ Exit
 >>> make package/shadowsocks-libev/compile V=s
 
