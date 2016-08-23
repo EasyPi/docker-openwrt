@@ -1,3 +1,3 @@
 FROM scratch
 ADD rootfs.tgz /
-ENTRYPOINT ["init"]
+CMD ["/sbin/init"]

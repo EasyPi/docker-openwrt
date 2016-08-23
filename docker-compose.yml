@@ -3,8 +3,11 @@ openwrt:
   container_name: openwrt
   hostname: OpenWrt
   ports:
-    - "8022:22"
-    - "8080:80"
+    - "8022:22/tcp"
+    - "8080:80/tcp"
+  volumes:
+    - ./ipk:/tmp/ipk
+  privileged: no
   restart: unless-stopped
 
 base:

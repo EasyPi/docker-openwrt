@@ -74,6 +74,7 @@ $ docker-compose exec bcm2708 bash
 >>> make defconfig
 >>> IGNORE_ERRORS=1 make V=s
 
+>>> sudo apt-get install -y ccache # for bcm2708
 >>> git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
 >>> ./scripts/feeds install libopenssl zlib
 >>> vi package/shadowsocks-libev/Makefile

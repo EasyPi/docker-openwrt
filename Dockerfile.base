@@ -8,6 +8,7 @@ MAINTAINER EasyPi Software Foundation
 RUN set -xe \
     && apt-get update \
     && apt-get install -y build-essential \
+                          ccache \
                           curl \
                           file \
                           gawk \
