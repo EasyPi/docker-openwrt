@@ -21,6 +21,7 @@ before_script:
   docker build -t easypi/openwrt:base -f Dockerfile.base .
 
 script:
+  make build;
   for TAG in $TAGS;
   do
     docker build -t easypi/openwrt:$TAG -f Dockerfile.$TAG .;
@@ -28,6 +29,7 @@ script:
 
 after_success:
   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  docker push easypi/openwrt;
   docker push easypi/openwrt:base;
   for TAG in $TAGS;
   do
