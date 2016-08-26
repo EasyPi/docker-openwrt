@@ -24,6 +24,13 @@ bcm2708:
   volumes:
     - ./data/bcm2708:/data
 
+bcm2709:
+  extends:
+    service: base
+  image: easypi/openwrt:bcm2709
+  volumes:
+    - ./data/bcm2709:/data
+
 bcm2710:
   extends:
     service: base
