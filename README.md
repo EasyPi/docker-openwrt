@@ -38,6 +38,12 @@ $ docker-compose exec openwrt sh
 >>> exit
 ```
 
+## issues
+
+- [ ] OpenWrt cannot access NIC properly.
+
+-----------------------------------------
+
 OpenWrt Builder
 ===============
 
@@ -53,19 +59,19 @@ base:
     - TERM=xterm
   restart: unless-stopped
 
-bcm2708:
+bcm2710:
   extends:
     service: base
-  image: easypi/openwrt:bcm2708
+  image: easypi/openwrt:bcm2710
   volumes:
-    - ./data/bcm2708:/data
+    - ./data/bcm2710:/data
 ```
 
 ## Server Setup
 
 ```bash
-$ docker-compose up -d bcm2708
-$ docker-compose exec bcm2708 bash
+$ docker-compose up -d bcm2710
+$ docker-compose exec bcm2710 bash
 >>> cd ~/sdk
 >>> sudo chmod 777 bin
 
@@ -74,36 +80,46 @@ $ docker-compose exec bcm2708 bash
 >>> make defconfig
 >>> IGNORE_ERRORS=1 make V=s
 
->>> sudo apt-get install -y ccache # for bcm2708
 >>> git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
 >>> ./scripts/feeds install libopenssl zlib
 >>> vi package/shadowsocks-libev/Makefile
 - DEPENDS:=$(3) +libpthread
 + DEPENDS:=$(3) +libpthread +zlib
->>> make menuconfig # Network ▷ shadowsocks-libev-spec ▷ Save ▷ Exit
+>>> make menuconfig # Network ▷ <M> shadowsocks-libev ▷ Save ▷ Exit
 >>> make package/shadowsocks-libev/compile V=s
 
->>> tree -dF /data/
+>>> git clone https://github.com/shadowsocks/luci-app-shadowsocks.git package/luci-app-shadowsocks
+>>> pushd package/luci-app-shadowsocks/tools/po2lmo
+>>> make && sudo make install
+>>> popd
+>>> make menuconfig # LuCI ▷ 3. Applications ▷ <M> luci-app-shadowsocks ▷ Save ▷ Exit
+>>> make package/luci-app-shadowsocks/compile V=s
+
+$ tree -A -F -L 3 /data/
 /data/
-└── brcm2708/
-    └── packages/
-        ├── base
-        ├── luci
-        ├── management
-        ├── packages
-        ├── routing
-        └── telephony
+├── packages/
+│   └── arm_cortex-a53_neon-vfpv4/
+│       ├── base/
+│       └── packages/
+└── targets/
+    └── brcm2708/
+        └── bcm2710/
 ```
+
+> You need to manage dependencies manually without `./scripts/feeds`.
 
 ## Client Setup
 
 ```
-$ vi /etc/opkg.conf
 $ opkg update
-$ opkg install shadowsocks-libev-spec
+$ opkg install shadowsocks-libev*.ipk \
+               luci-app-shadowsocks*.ipk \
+               iptables-mod-tproxy
 ```
 
 ## References
 
 - <https://wiki.openwrt.org/doc/howto/build>
 - <https://docs.travis-ci.com/user/docker/>
+- <https://github.com/shadowsocks/openwrt-shadowsocks>
+- <https://github.com/shadowsocks/luci-app-shadowsocks>
