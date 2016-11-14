@@ -81,10 +81,10 @@ $ docker-compose exec bcm2710 bash
 >>> IGNORE_ERRORS=1 make V=s
 
 >>> git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
->>> ./scripts/feeds install libopenssl zlib
+>>> ./scripts/feeds install libopenssl libpcre zlib
 >>> vi package/shadowsocks-libev/Makefile
-- DEPENDS:=$(3) +libpthread
-+ DEPENDS:=$(3) +libpthread +zlib
+- DEPENDS:=$(3) +libpcre +libpthread
++ DEPENDS:=$(3) +libpcre +libpthread +zlib
 >>> make menuconfig # Network ▷ <M> shadowsocks-libev ▷ Save ▷ Exit
 >>> make package/shadowsocks-libev/compile V=s
 
