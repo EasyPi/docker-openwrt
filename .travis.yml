@@ -8,7 +8,7 @@ services:
   - docker
 
 env:
-  - TAGS="bcm2708 bcm2709 bcm2710 mt7628 mt7688 x86-64"
+  - TAGS="bcm2708 bcm2709 bcm2710 mt7620 mt7628 mt7688 x86-64"
 
 install:
   - echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
