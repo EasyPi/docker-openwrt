@@ -75,19 +75,24 @@ $ docker-compose exec bcm2710 bash
 >>> cd ~/sdk
 >>> sudo chmod 777 bin
 
+### build all
 >>> ./scripts/feeds update -a
 >>> ./scripts/feeds install -a
 >>> make defconfig
 >>> IGNORE_ERRORS=1 make V=s
 
+### build shadowsocks-libev
+>>> rm -r package/feeds
+>>> git clone https://github.com/shadowsocks/openwrt-feeds.git package/feeds
 >>> git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
->>> ./scripts/feeds install libopenssl libpcre zlib
+>>> ./scripts/feeds install zlib
 >>> vi package/shadowsocks-libev/Makefile
-- DEPENDS:=$(3) +libpcre +libpthread
-+ DEPENDS:=$(3) +libpcre +libpthread +zlib
+- DEPENDS:=+libev +libudns +libpcre +libpthread +libsodium +libmbedtls
++ DEPENDS:=+libev +libudns +libpcre +libpthread +libsodium +libmbedtls +zlib
 >>> make menuconfig # Network ▷ <M> shadowsocks-libev ▷ Save ▷ Exit
 >>> make package/shadowsocks-libev/compile V=s
 
+### build luci-app-shadowsocks
 >>> git clone https://github.com/shadowsocks/luci-app-shadowsocks.git package/luci-app-shadowsocks
 >>> pushd package/luci-app-shadowsocks/tools/po2lmo
 >>> make && sudo make install
