@@ -10,13 +10,6 @@ services:
 env:
   - TAGS="bcm2708 bcm2709 bcm2710 mt7620 mt7628 mt7688 x86-64"
 
-install:
-  - echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
-  - sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-  - sudo apt-get update
-  - sudo apt-get -qqy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-engine
-  - docker version
-
 before_script:
   docker build -t easypi/openwrt:base -f Dockerfile.base .
 
