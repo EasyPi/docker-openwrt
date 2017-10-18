@@ -5,10 +5,10 @@
 FROM easypi/openwrt:base
 MAINTAINER EasyPi Software Foundation
 
-ENV OPENWRT_VERSION=17.01.3
-ENV OPENWRT_URL=https://downloads.lede-project.org/releases/17.01.3/targets/brcm2708/bcm2710
-ENV OPENWRT_IMG=lede-imagebuilder-17.01.3-brcm2708-bcm2710.Linux-x86_64
-ENV OPENWRT_SDK=lede-sdk-17.01.3-brcm2708-bcm2710_gcc-5.4.0_musl-1.1.16_eabi.Linux-x86_64
+ENV OPENWRT_VERSION=17.01.4
+ENV OPENWRT_URL=https://downloads.lede-project.org/releases/17.01.4/targets/brcm2708/bcm2710
+ENV OPENWRT_IMG=lede-imagebuilder-17.01.4-brcm2708-bcm2710.Linux-x86_64
+ENV OPENWRT_SDK=lede-sdk-17.01.4-brcm2708-bcm2710_gcc-5.4.0_musl-1.1.16_eabi.Linux-x86_64
 ENV OPENWRT_IMG_URL=${OPENWRT_URL}/${OPENWRT_IMG}.tar.xz
 ENV OPENWRT_SDK_URL=${OPENWRT_URL}/${OPENWRT_SDK}.tar.xz
 
