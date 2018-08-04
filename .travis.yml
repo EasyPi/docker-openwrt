@@ -8,7 +8,7 @@ services:
   - docker
 
 env:
-  - TAGS="bcm2708 bcm2709 bcm2710 mt7620 mt7628 mt7688 mvebu x86-64"
+  - TAGS="bcm2708 bcm2709 bcm2710 mt7620 mt76x8 mt7688 mvebu x86-64"
 
 before_script:
   docker build -t easypi/openwrt:base -f Dockerfile.base .
