@@ -5,10 +5,10 @@
 FROM easypi/openwrt:base
 MAINTAINER EasyPi Software Foundation
 
-ENV OPENWRT_VERSION=18.06.2
-ENV OPENWRT_URL=https://downloads.openwrt.org/releases/18.06.2/targets/brcm2708/bcm2708
-ENV OPENWRT_IMG=openwrt-imagebuilder-18.06.2-brcm2708-bcm2708.Linux-x86_64
-ENV OPENWRT_SDK=openwrt-sdk-18.06.2-brcm2708-bcm2708_gcc-7.3.0_musl_eabi.Linux-x86_64
+ENV OPENWRT_VERSION=18.06.4
+ENV OPENWRT_URL=https://downloads.openwrt.org/releases/18.06.4/targets/brcm2708/bcm2708
+ENV OPENWRT_IMG=openwrt-imagebuilder-18.06.4-brcm2708-bcm2708.Linux-x86_64
+ENV OPENWRT_SDK=openwrt-sdk-18.06.4-brcm2708-bcm2708_gcc-7.3.0_musl_eabi.Linux-x86_64
 ENV OPENWRT_IMG_URL=${OPENWRT_URL}/${OPENWRT_IMG}.tar.xz
 ENV OPENWRT_SDK_URL=${OPENWRT_URL}/${OPENWRT_SDK}.tar.xz
 
